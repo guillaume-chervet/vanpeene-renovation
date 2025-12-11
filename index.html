@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr" class="page">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vanpeene Rénovation EURL - Rénovation région Lilloise</title>
+    <meta name="description" content="Vanpeene Rénovation EURL, spécialiste de la rénovation intérieure et extérieure sur la région Lilloise. Devis gratuit et interventions rapides." />
+    <style>
+        :root {
+            --vr-primary: #6f86d8;       /* proche du bleu du logo */
+            --vr-primary-dark: #4759a3;
+            --vr-accent: #23408f;
+            --vr-bg: #f5f7ff;
+            --vr-text: #222222;
+            --vr-muted: #666666;
+            --vr-white: #ffffff;
+            --vr-radius-lg: 1.25rem;
+            --vr-radius-md: 0.75rem;
+            --vr-shadow-soft: 0 18px 30px rgba(0, 0, 0, 0.08);
+            --vr-spacing: 1.5rem;
+            --vr-max-width: 1100px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.page__body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #ffffff 0, var(--vr-bg) 55%, #e4e8ff 100%);
+            color: var(--vr-text);
+            line-height: 1.6;
+        }
+
+        .page__body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page__wrapper {
+            max-width: var(--vr-max-width);
+            margin: 0 auto;
+            padding: 1.5rem 1.25rem 3rem;
+        }
+
+        /* HEADER */
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 999px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--vr-shadow-soft);
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0.75rem;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .site-header__logo-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .site-header__logo-img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+        }
+
+        .site-header__title {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--vr-accent);
+        }
+
+        .site-header__subtitle {
+            font-size: 0.78rem;
+            color: var(--vr-muted);
+        }
+
+        .site-header__nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .site-header__nav-link {
+            text-decoration: none;
+            color: var(--vr-muted);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .site-header__nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -0.25rem;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--vr-primary), var(--vr-accent));
+            transition: width 0.22s ease-out;
+        }
+
+        .site-header__nav-link:hover::after,
+        .site-header__nav-link:focus-visible::after {
+            width: 100%;
+        }
+
+        .site-header__phone {
+            display: none;
+        }
+
+        /* HERO */
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+            gap: 2.5rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero__content {
+            padding: 2.25rem 2rem;
+            border-radius: var(--vr-radius-lg);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--vr-shadow-soft);
+            border: 1px solid rgba(111, 134, 216, 0.16);
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(111, 134, 216, 0.12);
+            color: var(--vr-primary-dark);
+            font-size: 0.8rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .hero__badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--vr-primary);
+            box-shadow: 0 0 0 6px rgba(111, 134, 216, 0.23);
+        }
+
+        .hero__title {
+            font-size: clamp(2rem, 3vw + 0.8rem, 2.7rem);
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+            color: var(--vr-accent);
+        }
+
+        .hero__title-highlight {
+            color: var(--vr-primary-dark);
+        }
+
+        .hero__location {
+            font-size: 0.95rem;
+            color: var(--vr-muted);
+            margin-bottom: 1.4rem;
+        }
+
+        .hero__description {
+            font-size: 0.98rem;
+            margin-bottom: 1.8rem;
+            color: var(--vr-text);
+        }
+
+        .hero__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .hero__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+        }
+
+        .hero__btn--primary {
+            background: linear-gradient(135deg, var(--vr-primary), var(--vr-primary-dark));
+            color: var(--vr-white);
+            box-shadow: 0 14px 25px rgba(111, 134, 216, 0.4);
+        }
+
+        .hero__btn--primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 30px rgba(111, 134, 216, 0.55);
+        }
+
+        .hero__btn--ghost {
+            background: rgba(255, 255, 255, 0.45);
+            color: var(--vr-primary-dark);
+            border: 1px solid rgba(111, 134, 216, 0.45);
+        }
+
+        .hero__phone-label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--vr-muted);
+        }
+
+        .hero__phone-number {
+            font-weight: 700;
+            color: var(--vr-accent);
+        }
+
+        .hero__visual {
+            text-align: center;
+        }
+
+        .hero__logo-card {
+            border-radius: var(--vr-radius-lg);
+            background: linear-gradient(145deg, rgba(111, 134, 216, 0.18), rgba(255, 255, 255, 0.85));
+            padding: 1.75rem 1.5rem 1.4rem;
+            box-shadow: var(--vr-shadow-soft);
+            border: 1px solid rgba(111, 134, 216, 0.32);
+        }
+
+        .hero__logo-img {
+            width: min(250px, 80%);
+            max-width: 260px;
+        }
+
+        .hero__list {
+            list-style: none;
+            margin-top: 1.4rem;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--vr-text);
+        }
+
+        .hero__list-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero__list-dot {
+            margin-top: 0.3rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--vr-primary);
+        }
+
+        /* GENERIC SECTIONS */
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section__title {
+            font-size: 1.6rem;
+            margin-bottom: 0.4rem;
+            color: var(--vr-accent);
+        }
+
+        .section__subtitle {
+            font-size: 0.96rem;
+            color: var(--vr-muted);
+            margin-bottom: 1.6rem;
+        }
+
+        /* SERVICES */
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
+
+        .services__card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--vr-radius-md);
+            padding: 1.3rem 1.25rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(111, 134, 216, 0.18);
+        }
+
+        .services__card-title {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            font-size: 1rem;
+            color: var(--vr-primary-dark);
+        }
+
+        .services__card-text {
+            font-size: 0.9rem;
+            color: var(--vr-muted);
+        }
+
+        /* ZONE D’INTERVENTION / À PROPOS */
+
+        .about {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 1.75rem;
+        }
+
+        .about__highlight {
+            padding: 1.2rem 1.3rem;
+            border-radius: var(--vr-radius-md);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px dashed rgba(111, 134, 216, 0.6);
+            font-size: 0.9rem;
+            color: var(--vr-text);
+        }
+
+        .about__list {
+            margin-top: 0.85rem;
+        }
+
+        .about__list-item {
+            font-size: 0.9rem;
+            color: var(--vr-muted);
+            margin-left: 1rem;
+        }
+
+        .about__zone {
+            padding: 1.2rem 1.3rem;
+            border-radius: var(--vr-radius-md);
+            background: linear-gradient(135deg, rgba(111, 134, 216, 0.14), rgba(255, 255, 255, 0.95));
+            border: 1px solid rgba(111, 134, 216, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .about__zone-title {
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: var(--vr-primary-dark);
+        }
+
+        /* CONTACT */
+
+        .contact {
+            display: grid;
+            grid-template-columns: minmax(0, 2.5fr) minmax(0, 2.2fr);
+            gap: 1.75rem;
+            align-items: center;
+        }
+
+        .contact__card {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 1.6rem 1.5rem;
+            border-radius: var(--vr-radius-lg);
+            border: 1px solid rgba(111, 134, 216, 0.2);
+            box-shadow: var(--vr-shadow-soft);
+        }
+
+        .contact__row {
+            margin-bottom: 1rem;
+        }
+
+        .contact__label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--vr-muted);
+        }
+
+        .contact__value {
+            font-weight: 600;
+            color: var(--vr-accent);
+        }
+
+        .contact__value-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .contact__value-link:hover,
+        .contact__value-link:focus-visible {
+            text-decoration: underline;
+        }
+
+        .contact__note {
+            font-size: 0.88rem;
+            color: var(--vr-muted);
+        }
+
+        .contact__fb-card {
+            padding: 1.3rem 1.2rem;
+            border-radius: var(--vr-radius-md);
+            background: radial-gradient(circle at top left, rgba(111, 134, 216, 0.3), rgba(35, 64, 143, 0.95));
+            color: var(--vr-white);
+        }
+
+        .contact__fb-title {
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .contact__fb-link {
+            color: var(--vr-white);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .contact__fb-link:hover,
+        .contact__fb-link:focus-visible {
+            text-decoration: underline;
+        }
+
+        /* FOOTER */
+
+        .site-footer {
+            padding: 1.5rem 1.25rem 0.5rem;
+            border-top: 1px solid rgba(111, 134, 216, 0.25);
+            font-size: 0.8rem;
+            color: var(--vr-muted);
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .site-footer__line {
+            margin-bottom: 0.3rem;
+        }
+
+        .site-footer__strong {
+            font-weight: 600;
+            color: var(--vr-primary-dark);
+        }
+
+        /* MISC */
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @media (max-width: 900px) {
+            .site-header {
+                padding-inline: 1rem;
+            }
+
+            .site-header__nav {
+                display: none;
+            }
+
+            .site-header__phone {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                font-size: 0.8rem;
+            }
+
+            .site-header__phone-number {
+                font-size: 0.92rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero__content {
+                order: 2;
+            }
+
+            .hero__visual {
+                order: 1;
+            }
+
+            .services__grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .about,
+            .contact {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page__wrapper {
+                padding-inline: 1rem;
+            }
+
+            .site-header {
+                border-radius: 1rem;
+            }
+
+            .hero__content {
+                padding: 1.5rem 1.25rem;
+            }
+
+            .services__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="page__body">
+<div class="page__wrapper">
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="site-header__logo-group">
+            <img src="assets/logo-vanpeene-renovation.png" alt="Logo Vanpeene Rénovation EURL" class="site-header__logo-img" />
+            <div>
+                <div class="site-header__title">Vanpeene Rénovation EURL</div>
+                <div class="site-header__subtitle">Rénovation sur la région Lilloise</div>
+            </div>
+        </div>
+
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <a class="site-header__nav-link" href="#services">Services</a>
+            <a class="site-header__nav-link" href="#about">À propos</a>
+            <a class="site-header__nav-link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="site-header__phone">
+            <span class="hero__phone-label">Devis & renseignements</span>
+            <a class="hero__phone-number" href="tel:+33611199185">06&nbsp;11&nbsp;19&nbsp;91&nbsp;85</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero__content">
+                <div class="hero__badge">
+                    <span class="hero__badge-dot"></span>
+                    <span>Entreprise de rénovation à taille humaine</span>
+                </div>
+                <h1 class="hero__title" id="hero-title">
+                    Donnez une nouvelle vie à votre maison
+                    <span class="hero__title-highlight">dans la métropole Lilloise</span>
+                </h1>
+                <p class="hero__location">Basé près de Lille – interventions sur la région Lilloise et alentours.</p>
+                <p class="hero__description">
+                    Vanpeene Rénovation EURL vous accompagne pour tous vos travaux de rénovation intérieure
+                    et extérieure&nbsp;: peinture, sols, salles de bains, façades, toitures… Un seul interlocuteur,
+                    un travail soigné et des finitions propres.
+                </p>
+
+                <div class="hero__actions">
+                    <a class="hero__btn hero__btn--primary" href="#contact">
+                        Demander un devis gratuit
+                    </a>
+                    <a class="hero__btn hero__btn--ghost" href="tel:+33611199185">
+                        📞 Appeler le&nbsp;06&nbsp;11&nbsp;19&nbsp;91&nbsp;85
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero__visual">
+                <div class="hero__logo-card">
+                    <img src="assets/logo-vanpeene-renovation.png" alt="Vanpeene Rénovation EURL" class="hero__logo-img" />
+                    <ul class="hero__list">
+                        <li class="hero__list-item">
+                            <span class="hero__list-dot"></span>
+                            <span>Conseils personnalisés pour vos projets de rénovation.</span>
+                        </li>
+                        <li class="hero__list-item">
+                            <span class="hero__list-dot"></span>
+                            <span>Travail propre, suivi sérieux et respect des délais.</span>
+                        </li>
+                        <li class="hero__list-item">
+                            <span class="hero__list-dot"></span>
+                            <span>Devis gratuit, sans engagement, sur la région Lilloise.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section services" id="services">
+            <header>
+                <h2 class="section__title">Nos principaux services</h2>
+                <p class="section__subtitle">
+                    Vanpeene Rénovation EURL intervient sur une large gamme de travaux pour améliorer, moderniser
+                    ou remettre à neuf votre logement.
+                </p>
+            </header>
+
+            <div class="services__grid">
+                <article class="services__card">
+                    <h3 class="services__card-title">Rénovation intérieure</h3>
+                    <p class="services__card-text">
+                        Peinture, murs et plafonds, pose de sols (parquet, stratifié, vinyle),
+                        rafraîchissement complet de pièces de vie, chambres, couloirs.
+                    </p>
+                </article>
+
+                <article class="services__card">
+                    <h3 class="services__card-title">Cuisine & salle de bains</h3>
+                    <p class="services__card-text">
+                        Modernisation de cuisine, rénovation de salle de bains, carrelage, faïence,
+                        petits aménagements pour plus de confort au quotidien.
+                    </p>
+                </article>
+
+                <article class="services__card">
+                    <h3 class="services__card-title">Façade & extérieur</h3>
+                    <p class="services__card-text">
+                        Rafraîchissement de façade, travaux extérieurs légers, entretien et remise en état
+                        pour valoriser votre maison dès le premier regard.
+                    </p>
+                </article>
+
+                <article class="services__card">
+                    <h3 class="services__card-title">Toiture & petites réparations</h3>
+                    <p class="services__card-text">
+                        Petites réparations de toiture, traitement local, remplacement ponctuel de tuiles
+                        et interventions préventives.
+                    </p>
+                </article>
+
+                <article class="services__card">
+                    <h3 class="services__card-title">Réaménagement & finitions</h3>
+                    <p class="services__card-text">
+                        Création d’ambiances, finitions soignées, ajustements après travaux,
+                        reprise de petits défauts pour un rendu impeccable.
+                    </p>
+                </article>
+
+                <article class="services__card">
+                    <h3 class="services__card-title">Conseils & accompagnement</h3>
+                    <p class="services__card-text">
+                        Échanges sur votre projet, aide au choix des matériaux et des couleurs,
+                        planification des travaux en fonction de votre budget.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <!-- À PROPOS / ZONE -->
+        <section class="section" id="about">
+            <header>
+                <h2 class="section__title">Pourquoi faire appel à Vanpeene Rénovation&nbsp;?</h2>
+                <p class="section__subtitle">
+                    Un artisan disponible, à l’écoute, avec le souci du détail pour chaque chantier,
+                    qu’il soit petit ou plus important.
+                </p>
+            </header>
+
+            <div class="about">
+                <div class="about__highlight">
+                    <p>
+                        Vanpeene Rénovation EURL, c’est une entreprise de proximité qui privilégie
+                        la qualité du travail et la relation avec ses clients.
+                    </p>
+                    <div class="about__list">
+                        <p class="about__list-item">• Interlocuteur unique tout au long du chantier.</p>
+                        <p class="about__list-item">• Chantier laissé propre après intervention.</p>
+                        <p class="about__list-item">• Conseils adaptés à votre logement et à votre budget.</p>
+                    </div>
+                </div>
+
+                <aside class="about__zone">
+                    <div class="about__zone-title">Zone d’intervention</div>
+                    <p>
+                        Interventions principalement sur la région Lilloise et la métropole :
+                        Lille, Lambersart, Lomme, Wambrechies, Marcq-en-Barœul, et communes voisines.
+                    </p>
+                    <p style="margin-top:0.6rem;">
+                        Vous avez un projet de rénovation dans ce secteur&nbsp;?
+                        N’hésitez pas à demander un devis gratuit.
+                    </p>
+                </aside>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="section" id="contact">
+            <header>
+                <h2 class="section__title">Contact & devis</h2>
+                <p class="section__subtitle">
+                    Expliquez votre projet (pièces concernées, type de travaux, délais souhaités) et nous revenons vers vous
+                    rapidement pour échanger et vous proposer un devis.
+                </p>
+            </header>
+
+            <div class="contact">
+                <div class="contact__card">
+                    <div class="contact__row">
+                        <div class="contact__label">Téléphone</div>
+                        <div class="contact__value">
+                            <a class="contact__value-link" href="tel:+33611199185">
+                                06&nbsp;11&nbsp;19&nbsp;91&nbsp;85
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact__row">
+                        <div class="contact__label">Facebook</div>
+                        <div class="contact__value">
+                            <a class="contact__value-link"
+                               href="https://www.facebook.com/vanpeene.renovation/"
+                               target="_blank" rel="noopener">
+                                facebook.com/vanpeene.renovation
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="contact__row">
+                        <div class="contact__label">Horaires indicatifs</div>
+                        <div class="contact__value">
+                            Du lundi au vendredi – sur rendez-vous.
+                        </div>
+                    </div>
+
+                    <p class="contact__note">
+                        Laissez un message ou envoyez-nous vos coordonnées, et nous vous
+                        recontactons pour convenir d’un échange sur votre projet.
+                    </p>
+                </div>
+
+                <aside class="contact__fb-card">
+                    <div class="contact__fb-title">Suivez les réalisations sur Facebook</div>
+                    <p style="font-size:0.9rem; margin-bottom:0.7rem;">
+                        Photos avant / après, idées de rénovation et exemples de chantiers
+                        sur la région Lilloise.
+                    </p>
+                    <a class="contact__fb-link"
+                       href="https://www.facebook.com/vanpeene.renovation/"
+                       target="_blank" rel="noopener">
+                        Voir la page Facebook Vanpeene Rénovation →
+                    </a>
+                </aside>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="site-footer__line">
+            <span class="site-footer__strong">Vanpeene Rénovation EURL</span> – Rénovation intérieure & extérieure – Région Lilloise
+        </div>
+        <div>© <span class="site-footer__strong">Vanpeene Rénovation</span> – Tous droits réservés.</div>
+    </footer>
+
+</div>
+</body>
+</html>
