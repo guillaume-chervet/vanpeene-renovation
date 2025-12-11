@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanpeene Rénovation EURL - Rénovation région Lilloise</title>
     <meta name="description" content="Vanpeene Rénovation EURL, spécialiste de la rénovation intérieure et extérieure sur la région Lilloise. Devis gratuit et interventions rapides." />
+
+    <!-- Favicon avec le logo -->
+    <link rel="icon" type="image/png" href="assets/logo-vanpeene-renovation.png" />
+
     <style>
         :root {
             --vr-primary: #6f86d8;
@@ -74,6 +78,7 @@
             width: 48px;
             height: 48px;
             object-fit: contain;
+            flex-shrink: 0;
         }
 
         .site-header__title {
@@ -516,8 +521,6 @@
             color: var(--vr-primary-dark);
         }
 
-        /* MISC */
-
         html {
             scroll-behavior: smooth;
         }
@@ -555,7 +558,6 @@
                 display: inline-flex;
             }
 
-            /* nav mobile sous le header */
             .site-header__nav--mobile {
                 display: flex;
                 flex-direction: column;
@@ -616,15 +618,35 @@
 
         @media (max-width: 600px) {
             .page__wrapper {
-                padding-inline: 0.9rem;
+                padding-inline: 0.8rem;
+            }
+
+            .site-header {
+                padding: 0.5rem 0.85rem;
+                gap: 0.6rem;
+            }
+
+            .site-header__logo-img {
+                width: 40px;
+                height: 40px;
             }
 
             .site-header__title {
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+                white-space: normal;
+                max-width: 130px;
+            }
+
+            .site-header__subtitle {
+                display: none; /* on masque le sous-titre pour gagner de la place */
+            }
+
+            .site-header__phone {
+                display: none; /* évite de surcharger le header en très petit écran */
             }
 
             .hero__content {
-                padding: 1.5rem 1.25rem;
+                padding: 1.5rem 1.2rem;
             }
 
             .hero__logo-card {
@@ -653,7 +675,7 @@
         <div class="site-header__logo-group">
             <img src="assets/logo-vanpeene-renovation.png" alt="Logo Vanpeene Rénovation EURL" class="site-header__logo-img" />
             <div>
-                <div class="site-header__title">Vanpeene Rénovation</div>
+                <div class="site-header__title">Vanpeene Rénovation EURL</div>
                 <div class="site-header__subtitle">Rénovation sur la région Lilloise</div>
             </div>
         </div>
