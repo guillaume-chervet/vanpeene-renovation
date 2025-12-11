@@ -616,6 +616,32 @@
             .contact__fb-card {
                 order: -1;
             }
+
+            /* Liens du menu mobile : plein écran + gros et faciles à cliquer, texte centré */
+            .site-header__nav--mobile .site-header__nav-link {
+                display: block;
+                width: 100%;
+                padding: 0.75rem 0.4rem;
+                font-size: 1rem;
+                text-align: center;        /* ⬅️ centré au lieu de left */
+                border-radius: 0.6rem;
+                background: transparent;
+            }
+
+            .site-header__nav--mobile .site-header__nav-link + .site-header__nav-link {
+                margin-top: 0.25rem;
+            }
+
+            .site-header__nav--mobile .site-header__nav-link::after {
+                display: none; /* on enlève le petit trait animé sous le texte */
+            }
+
+            .site-header__nav--mobile .site-header__nav-link:hover,
+            .site-header__nav--mobile .site-header__nav-link:focus-visible {
+                background: rgba(111, 134, 216, 0.12);
+                color: var(--vr-primary-dark);
+            }
+
         }
 
         @media (max-width: 600px) {
@@ -878,9 +904,9 @@
                         <div class="contact__label">Facebook</div>
                         <div class="contact__value">
                             <a class="contact__value-link"
-                               href="https://www.facebook.com/vanpeene.renovation/"
+                               href="https://www.facebook.com/christopher.vanpeene.9"
                                target="_blank" rel="noopener">
-                                facebook.com/vanpeene.renovation
+                                christopher.vanpeene.9
                             </a>
                         </div>
                     </div>
