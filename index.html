@@ -7,7 +7,7 @@
     <meta name="description" content="Vanpeene Rénovation EURL, spécialiste de la rénovation intérieure et extérieure sur la région Lilloise. Devis gratuit et interventions rapides." />
     <style>
         :root {
-            --vr-primary: #6f86d8;       /* proche du bleu du logo */
+            --vr-primary: #6f86d8;
             --vr-primary-dark: #4759a3;
             --vr-accent: #23408f;
             --vr-bg: #f5f7ff;
@@ -17,7 +17,6 @@
             --vr-radius-lg: 1.25rem;
             --vr-radius-md: 0.75rem;
             --vr-shadow-soft: 0 18px 30px rgba(0, 0, 0, 0.08);
-            --vr-spacing: 1.5rem;
             --vr-max-width: 1100px;
         }
 
@@ -43,7 +42,7 @@
         .page__wrapper {
             max-width: var(--vr-max-width);
             margin: 0 auto;
-            padding: 1.5rem 1.25rem 3rem;
+            padding: 1.25rem 1.25rem 3rem;
         }
 
         /* HEADER */
@@ -55,7 +54,7 @@
             gap: 1.5rem;
             padding: 0.75rem 1.25rem;
             border-radius: 999px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.94);
             box-shadow: var(--vr-shadow-soft);
             margin-bottom: 2rem;
             position: sticky;
@@ -68,20 +67,22 @@
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            min-width: 0;
         }
 
         .site-header__logo-img {
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
         }
 
         .site-header__title {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
             color: var(--vr-accent);
+            white-space: nowrap;
         }
 
         .site-header__subtitle {
@@ -122,6 +123,67 @@
 
         .site-header__phone {
             display: none;
+        }
+
+        /* Burger */
+
+        .site-header__burger {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            border: 1px solid rgba(111, 134, 216, 0.4);
+            background: var(--vr-white);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .site-header__burger-line {
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--vr-accent);
+            position: relative;
+        }
+
+        .site-header__burger-line::before,
+        .site-header__burger-line::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: var(--vr-accent);
+        }
+
+        .site-header__burger-line::before {
+            top: -6px;
+        }
+
+        .site-header__burger-line::after {
+            top: 6px;
+        }
+
+        .site-header--open .site-header__burger-line {
+            background: transparent;
+        }
+
+        .site-header--open .site-header__burger-line::before {
+            top: 0;
+            transform: rotate(45deg);
+        }
+
+        .site-header--open .site-header__burger-line::after {
+            top: 0;
+            transform: rotate(-45deg);
+        }
+
+        .site-header--open .site-header__nav--mobile {
+            max-height: 280px;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         /* HERO */
@@ -322,7 +384,7 @@
             color: var(--vr-muted);
         }
 
-        /* ZONE D’INTERVENTION / À PROPOS */
+        /* ABOUT */
 
         .about {
             display: grid;
@@ -460,9 +522,18 @@
             scroll-behavior: smooth;
         }
 
+        /* --------- RESPONSIVE --------- */
+
         @media (max-width: 900px) {
+            .page__wrapper {
+                padding-inline: 1rem;
+            }
+
             .site-header {
                 padding-inline: 1rem;
+                border-radius: 1rem;
+                position: static;
+                margin-bottom: 1.5rem;
             }
 
             .site-header__nav {
@@ -473,23 +544,60 @@
                 display: flex;
                 flex-direction: column;
                 align-items: flex-end;
-                font-size: 0.8rem;
+                font-size: 0.78rem;
             }
 
             .site-header__phone-number {
                 font-size: 0.92rem;
             }
 
+            .site-header__burger {
+                display: inline-flex;
+            }
+
+            /* nav mobile sous le header */
+            .site-header__nav--mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+                margin: 0.6rem 0 1.4rem;
+                padding: 0.85rem 1rem;
+                border-radius: 1rem;
+                background: rgba(255, 255, 255, 0.96);
+                border: 1px solid rgba(111, 134, 216, 0.25);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                pointer-events: none;
+                transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+            }
+
             .hero {
                 grid-template-columns: 1fr;
+                gap: 1.75rem;
             }
 
             .hero__content {
                 order: 2;
+                padding: 1.7rem 1.35rem;
             }
 
             .hero__visual {
                 order: 1;
+            }
+
+            .hero__title {
+                font-size: 1.9rem;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero__btn {
+                width: 100%;
             }
 
             .services__grid {
@@ -500,23 +608,39 @@
             .contact {
                 grid-template-columns: 1fr;
             }
+
+            .contact__fb-card {
+                order: -1;
+            }
         }
 
         @media (max-width: 600px) {
             .page__wrapper {
-                padding-inline: 1rem;
+                padding-inline: 0.9rem;
             }
 
-            .site-header {
-                border-radius: 1rem;
+            .site-header__title {
+                font-size: 0.85rem;
             }
 
             .hero__content {
                 padding: 1.5rem 1.25rem;
             }
 
+            .hero__logo-card {
+                padding-inline: 1.1rem;
+            }
+
             .services__grid {
                 grid-template-columns: 1fr;
+            }
+
+            .section__title {
+                font-size: 1.4rem;
+            }
+
+            .section__subtitle {
+                font-size: 0.92rem;
             }
         }
     </style>
@@ -525,11 +649,11 @@
 <div class="page__wrapper">
 
     <!-- HEADER -->
-    <header class="site-header">
+    <header class="site-header" id="site-header">
         <div class="site-header__logo-group">
             <img src="assets/logo-vanpeene-renovation.png" alt="Logo Vanpeene Rénovation EURL" class="site-header__logo-img" />
             <div>
-                <div class="site-header__title">Vanpeene Rénovation EURL</div>
+                <div class="site-header__title">Vanpeene Rénovation</div>
                 <div class="site-header__subtitle">Rénovation sur la région Lilloise</div>
             </div>
         </div>
@@ -544,7 +668,18 @@
             <span class="hero__phone-label">Devis & renseignements</span>
             <a class="hero__phone-number" href="tel:+33611199185">06&nbsp;11&nbsp;19&nbsp;91&nbsp;85</a>
         </div>
+
+        <button class="site-header__burger" type="button" aria-label="Ouvrir le menu" id="burger-btn">
+            <span class="site-header__burger-line"></span>
+        </button>
     </header>
+
+    <!-- NAV MOBILE -->
+    <nav class="site-header__nav site-header__nav--mobile" aria-label="Navigation principale mobile" id="mobile-nav">
+        <a class="site-header__nav-link" href="#services">Services</a>
+        <a class="site-header__nav-link" href="#about">À propos</a>
+        <a class="site-header__nav-link" href="#contact">Contact</a>
+    </nav>
 
     <!-- HERO -->
     <main>
@@ -764,5 +899,27 @@
     </footer>
 
 </div>
+
+<script>
+    (function () {
+        const header = document.getElementById("site-header");
+        const burger = document.getElementById("burger-btn");
+        const mobileNav = document.getElementById("mobile-nav");
+
+        if (!burger || !header || !mobileNav) return;
+
+        burger.addEventListener("click", function () {
+            const isOpen = header.classList.toggle("site-header--open");
+            burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        });
+
+        mobileNav.addEventListener("click", function (event) {
+            if (event.target.matches("a")) {
+                header.classList.remove("site-header--open");
+                burger.setAttribute("aria-expanded", "false");
+            }
+        });
+    })();
+</script>
 </body>
 </html>
