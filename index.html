@@ -4,17 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vanpeene Rénovation EURL - Rénovation région Lilloise</title>
-    <meta name="description" content="Vanpeene Rénovation EURL, spécialiste de la rénovation intérieure et extérieure sur la région Lilloise. Devis gratuit et interventions rapides." />
+    <meta name="description" content="Vanpeene Rénovation EURL, spécialiste toiture (couvreur, zinguerie) et rénovation intérieure/extérieure sur la région Lilloise. Devis gratuit et interventions rapides." />
 
-    <!-- Favicon avec le logo -->
     <link rel="icon" type="image/png" href="assets/logo-vanpeene-renovation.png" />
 
     <style>
         :root {
-            --vr-primary: #6f86d8;
-            --vr-primary-dark: #4759a3;
+            --vr-primary: #b14333;
+            --vr-primary-dark: #7f2b22;
             --vr-accent: #23408f;
-            --vr-bg: #f5f7ff;
+            --vr-green: #a7de9b;
+            --vr-green-dark: #3f7a39;
+
+            --vr-bg: #fbfaf7;
             --vr-text: #222222;
             --vr-muted: #666666;
             --vr-white: #ffffff;
@@ -22,26 +24,21 @@
             --vr-radius-md: 0.75rem;
             --vr-shadow-soft: 0 18px 30px rgba(0, 0, 0, 0.08);
             --vr-max-width: 1100px;
+            --vr-focus: 0 0 0 3px rgba(177, 67, 51, 0.25);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body.page__body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top, #ffffff 0, var(--vr-bg) 55%, #e4e8ff 100%);
+            background:
+                    radial-gradient(circle at top, #ffffff 0, var(--vr-bg) 55%, rgba(177, 67, 51, 0.10) 100%),
+                    radial-gradient(circle at 20% 30%, rgba(167, 222, 155, 0.20) 0, transparent 55%);
             color: var(--vr-text);
             line-height: 1.6;
         }
 
-        .page__body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        .page__body { min-height: 100vh; display: flex; flex-direction: column; }
 
         .page__wrapper {
             max-width: var(--vr-max-width);
@@ -49,8 +46,9 @@
             padding: 1.25rem 1.25rem 3rem;
         }
 
-        /* HEADER */
+        a:focus-visible, button:focus-visible { outline: none; box-shadow: var(--vr-focus); border-radius: 0.6rem; }
 
+        /* HEADER */
         .site-header {
             display: flex;
             align-items: center;
@@ -65,49 +63,27 @@
             top: 0.75rem;
             z-index: 10;
             backdrop-filter: blur(8px);
+            border: 1px solid rgba(177, 67, 51, 0.14);
         }
 
-        .site-header__logo-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            min-width: 0;
-        }
+        .site-header__logo-group { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
 
-        .site-header__logo-img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            flex-shrink: 0;
-        }
+        .site-header__logo-img { width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; }
 
         .site-header__title {
             font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
-            color: var(--vr-accent);
+            color: var(--vr-primary-dark);
             white-space: nowrap;
         }
 
-        .site-header__subtitle {
-            font-size: 0.78rem;
-            color: var(--vr-muted);
-        }
+        .site-header__subtitle { font-size: 0.78rem; color: var(--vr-muted); }
 
-        .site-header__nav {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            font-size: 0.9rem;
-        }
+        .site-header__nav { display: flex; align-items: center; gap: 1.25rem; font-size: 0.9rem; }
 
-        .site-header__nav-link {
-            text-decoration: none;
-            color: var(--vr-muted);
-            font-weight: 500;
-            position: relative;
-        }
+        .site-header__nav-link { text-decoration: none; color: var(--vr-muted); font-weight: 600; position: relative; }
 
         .site-header__nav-link::after {
             content: "";
@@ -117,27 +93,21 @@
             width: 0;
             height: 2px;
             border-radius: 999px;
-            background: linear-gradient(90deg, var(--vr-primary), var(--vr-accent));
+            background: linear-gradient(90deg, var(--vr-primary), var(--vr-green-dark));
             transition: width 0.22s ease-out;
         }
 
         .site-header__nav-link:hover::after,
-        .site-header__nav-link:focus-visible::after {
-            width: 100%;
-        }
+        .site-header__nav-link:focus-visible::after { width: 100%; }
 
-        .site-header__phone {
-            display: none;
-        }
-
-        /* Burger */
+        .site-header__phone { display: none; }
 
         .site-header__burger {
             display: none;
             width: 40px;
             height: 40px;
             border-radius: 999px;
-            border: 1px solid rgba(111, 134, 216, 0.4);
+            border: 1px solid rgba(177, 67, 51, 0.35);
             background: var(--vr-white);
             align-items: center;
             justify-content: center;
@@ -148,8 +118,9 @@
             width: 18px;
             height: 2px;
             border-radius: 999px;
-            background: var(--vr-accent);
+            background: var(--vr-primary-dark);
             position: relative;
+            transition: transform 0.15s ease-out;
         }
 
         .site-header__burger-line::before,
@@ -160,33 +131,21 @@
             width: 18px;
             height: 2px;
             border-radius: 999px;
-            background: var(--vr-accent);
+            background: var(--vr-primary-dark);
+            transition: transform 0.15s ease-out, top 0.15s ease-out;
         }
 
-        .site-header__burger-line::before {
-            top: -6px;
-        }
+        .site-header__burger-line::before { top: -6px; }
+        .site-header__burger-line::after  { top: 6px; }
 
-        .site-header__burger-line::after {
-            top: 6px;
-        }
+        .site-header--open .site-header__burger-line { background: transparent; }
+        .site-header--open .site-header__burger-line::before { top: 0; transform: rotate(45deg); }
+        .site-header--open .site-header__burger-line::after  { top: 0; transform: rotate(-45deg); }
 
-        .site-header--open .site-header__burger-line {
-            background: transparent;
-        }
-
-        .site-header--open .site-header__burger-line::before {
-            top: 0;
-            transform: rotate(45deg);
-        }
-
-        .site-header--open .site-header__burger-line::after {
-            top: 0;
-            transform: rotate(-45deg);
-        }
+        /* IMPORTANT: nav mobile cachée par défaut hors mobile */
+        .site-header__nav--mobile { display: none; }
 
         /* HERO */
-
         .hero {
             display: grid;
             grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
@@ -200,7 +159,7 @@
             border-radius: var(--vr-radius-lg);
             background: rgba(255, 255, 255, 0.95);
             box-shadow: var(--vr-shadow-soft);
-            border: 1px solid rgba(111, 134, 216, 0.16);
+            border: 1px solid rgba(177, 67, 51, 0.16);
         }
 
         .hero__badge {
@@ -209,7 +168,7 @@
             gap: 0.5rem;
             padding: 0.25rem 0.9rem;
             border-radius: 999px;
-            background: rgba(111, 134, 216, 0.12);
+            background: rgba(177, 67, 51, 0.10);
             color: var(--vr-primary-dark);
             font-size: 0.8rem;
             margin-bottom: 0.85rem;
@@ -219,39 +178,24 @@
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--vr-primary);
-            box-shadow: 0 0 0 6px rgba(111, 134, 216, 0.23);
+            background: var(--vr-green-dark);
+            box-shadow: 0 0 0 6px rgba(167, 222, 155, 0.35);
         }
 
         .hero__title {
             font-size: clamp(2rem, 3vw + 0.8rem, 2.7rem);
             line-height: 1.1;
             margin-bottom: 0.75rem;
-            color: var(--vr-accent);
-        }
-
-        .hero__title-highlight {
             color: var(--vr-primary-dark);
         }
 
-        .hero__location {
-            font-size: 0.95rem;
-            color: var(--vr-muted);
-            margin-bottom: 1.4rem;
-        }
+        .hero__title-highlight { color: var(--vr-accent); }
 
-        .hero__description {
-            font-size: 0.98rem;
-            margin-bottom: 1.8rem;
-            color: var(--vr-text);
-        }
+        .hero__location { font-size: 0.95rem; color: var(--vr-muted); margin-bottom: 1.4rem; }
 
-        .hero__actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            align-items: center;
-        }
+        .hero__description { font-size: 0.98rem; margin-bottom: 1.8rem; color: var(--vr-text); }
+
+        .hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; }
 
         .hero__btn {
             display: inline-flex;
@@ -262,7 +206,7 @@
             border-radius: 999px;
             border: none;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
             text-decoration: none;
             transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
@@ -271,19 +215,26 @@
         .hero__btn--primary {
             background: linear-gradient(135deg, var(--vr-primary), var(--vr-primary-dark));
             color: var(--vr-white);
-            box-shadow: 0 14px 25px rgba(111, 134, 216, 0.4);
+            box-shadow: 0 14px 25px rgba(177, 67, 51, 0.30);
         }
 
-        .hero__btn--primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 18px 30px rgba(111, 134, 216, 0.55);
-        }
+        .hero__btn--primary:hover { transform: translateY(-1px); box-shadow: 0 18px 30px rgba(177, 67, 51, 0.45); }
 
         .hero__btn--ghost {
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.55);
             color: var(--vr-primary-dark);
-            border: 1px solid rgba(111, 134, 216, 0.45);
+            border: 1px solid rgba(177, 67, 51, 0.38);
         }
+
+        .hero__btn--ghost:hover { background: rgba(167, 222, 155, 0.20); }
+
+        .hero__btn--mail {
+            background: rgba(167, 222, 155, 0.28);
+            color: var(--vr-green-dark);
+            border: 1px solid rgba(63, 122, 57, 0.25);
+        }
+
+        .hero__btn--mail:hover { background: rgba(167, 222, 155, 0.40); }
 
         .hero__phone-label {
             font-size: 0.78rem;
@@ -292,239 +243,230 @@
             color: var(--vr-muted);
         }
 
-        .hero__phone-number {
-            font-weight: 700;
-            color: var(--vr-accent);
-        }
+        .hero__phone-number { font-weight: 800; color: var(--vr-primary-dark); }
 
-        .hero__visual {
-            text-align: center;
-        }
+        .hero__visual { text-align: center; }
 
         .hero__logo-card {
             border-radius: var(--vr-radius-lg);
-            background: linear-gradient(145deg, rgba(111, 134, 216, 0.18), rgba(255, 255, 255, 0.85));
+            background: linear-gradient(145deg, rgba(177, 67, 51, 0.12), rgba(255, 255, 255, 0.90));
             padding: 1.75rem 1.5rem 1.4rem;
             box-shadow: var(--vr-shadow-soft);
-            border: 1px solid rgba(111, 134, 216, 0.32);
+            border: 1px solid rgba(177, 67, 51, 0.22);
         }
 
-        .hero__logo-img {
-            width: min(250px, 80%);
-            max-width: 260px;
-        }
+        .hero__logo-img { width: min(250px, 80%); max-width: 260px; }
 
-        .hero__list {
-            list-style: none;
-            margin-top: 1.4rem;
-            text-align: left;
-            font-size: 0.9rem;
-            color: var(--vr-text);
-        }
+        .hero__list { list-style: none; margin-top: 1.4rem; text-align: left; font-size: 0.9rem; color: var(--vr-text); }
 
-        .hero__list-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            margin-bottom: 0.4rem;
-        }
+        .hero__list-item { display: flex; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.4rem; }
 
-        .hero__list-dot {
-            margin-top: 0.3rem;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--vr-primary);
-        }
+        .hero__list-dot { margin-top: 0.3rem; width: 8px; height: 8px; border-radius: 50%; background: var(--vr-primary); }
 
         /* GENERIC SECTIONS */
+        .section { margin-bottom: 3rem; }
 
-        .section {
-            margin-bottom: 3rem;
-        }
+        .section__title { font-size: 1.6rem; margin-bottom: 0.4rem; color: var(--vr-accent); }
 
-        .section__title {
-            font-size: 1.6rem;
-            margin-bottom: 0.4rem;
-            color: var(--vr-accent);
-        }
-
-        .section__subtitle {
-            font-size: 0.96rem;
-            color: var(--vr-muted);
-            margin-bottom: 1.6rem;
-        }
+        .section__subtitle { font-size: 0.96rem; color: var(--vr-muted); margin-bottom: 1.6rem; }
 
         /* SERVICES */
-
-        .services__grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.5rem;
-        }
+        .services__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 
         .services__card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: var(--vr-radius-md);
             padding: 1.3rem 1.25rem;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(111, 134, 216, 0.18);
+            border: 1px solid rgba(177, 67, 51, 0.14);
         }
 
-        .services__card-title {
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            font-size: 1rem;
-            color: var(--vr-primary-dark);
+        .services__card--featured {
+            border: 1px solid rgba(63, 122, 57, 0.28);
+            background: linear-gradient(135deg, rgba(167, 222, 155, 0.22), rgba(255, 255, 255, 0.96));
         }
 
-        .services__card-text {
+        .services__card-title { font-weight: 800; margin-bottom: 0.4rem; font-size: 1rem; color: var(--vr-primary-dark); }
+
+        .services__card-text { font-size: 0.9rem; color: var(--vr-muted); }
+
+        /* FEED (Facebook) */
+        /* FEED (Facebook) */
+        .feed__wrap {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--vr-radius-lg);
+            box-shadow: var(--vr-shadow-soft);
+            border: 1px solid rgba(177, 67, 51, 0.14);
+            padding: 1.25rem;
+        }
+
+        .feed__wrap--featured {
+            border: 1px solid rgba(63, 122, 57, 0.28);
+            background: linear-gradient(135deg, rgba(167, 222, 155, 0.18), rgba(255, 255, 255, 0.96));
+            box-shadow: 0 22px 40px rgba(0, 0, 0, 0.10);
+        }
+
+        .feed__note {
             font-size: 0.9rem;
             color: var(--vr-muted);
+            margin-bottom: 1rem;
         }
+
+        .feed__embed {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .feed__frame {
+            width: min(520px, 100%);     /* ✅ évite le “vide” à droite */
+            border: 0;
+            display: block;
+            border-radius: 1rem;
+            overflow: hidden;
+            height: 640px;               /* ajuste si besoin */
+            background: rgba(0,0,0,0.02);
+            box-shadow: 0 14px 24px rgba(0,0,0,0.06);
+        }
+
+        .feed__actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            justify-content: center;     /* ✅ boutons centrés aussi */
+        }
+
+        .feed__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.65rem 1.1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 800;
+            border: 1px solid rgba(177, 67, 51, 0.30);
+            color: var(--vr-primary-dark);
+            background: rgba(255, 255, 255, 0.75);
+        }
+
+        .feed__btn:hover { background: rgba(167, 222, 155, 0.22); }
+
+        @media (max-width: 900px) {
+            .feed__wrap {
+                padding: 1.1rem;
+            }
+
+            .feed__frame {
+                height: 760px;           /* ✅ plus “en avant” en mobile */
+                border-radius: 1.1rem;
+            }
+
+            .feed__actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .feed__btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .feed__wrap {
+                padding: 1rem;
+            }
+
+            .feed__frame {
+                height: 820px;           /* ✅ encore plus de place en très petit écran */
+            }
+        }
+
 
         /* ABOUT */
-
-        .about {
-            display: grid;
-            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-            gap: 1.75rem;
-        }
+        .about { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 1.75rem; }
 
         .about__highlight {
             padding: 1.2rem 1.3rem;
             border-radius: var(--vr-radius-md);
             background: rgba(255, 255, 255, 0.95);
-            border: 1px dashed rgba(111, 134, 216, 0.6);
+            border: 1px dashed rgba(177, 67, 51, 0.45);
             font-size: 0.9rem;
             color: var(--vr-text);
         }
 
-        .about__list {
-            margin-top: 0.85rem;
-        }
+        .about__list { margin-top: 0.85rem; }
 
-        .about__list-item {
-            font-size: 0.9rem;
-            color: var(--vr-muted);
-            margin-left: 1rem;
-        }
+        .about__list-item { font-size: 0.9rem; color: var(--vr-muted); margin-left: 1rem; }
 
         .about__zone {
             padding: 1.2rem 1.3rem;
             border-radius: var(--vr-radius-md);
-            background: linear-gradient(135deg, rgba(111, 134, 216, 0.14), rgba(255, 255, 255, 0.95));
-            border: 1px solid rgba(111, 134, 216, 0.3);
+            background: linear-gradient(135deg, rgba(167, 222, 155, 0.20), rgba(255, 255, 255, 0.96));
+            border: 1px solid rgba(63, 122, 57, 0.20);
             font-size: 0.9rem;
         }
 
-        .about__zone-title {
-            font-weight: 600;
-            margin-bottom: 0.35rem;
-            color: var(--vr-primary-dark);
-        }
+        .about__zone-title { font-weight: 900; margin-bottom: 0.35rem; color: var(--vr-green-dark); }
 
         /* CONTACT */
-
-        .contact {
-            display: grid;
-            grid-template-columns: minmax(0, 2.5fr) minmax(0, 2.2fr);
-            gap: 1.75rem;
-            align-items: center;
-        }
+        .contact { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(0, 2.2fr); gap: 1.75rem; align-items: center; }
 
         .contact__card {
             background: rgba(255, 255, 255, 0.96);
             padding: 1.6rem 1.5rem;
             border-radius: var(--vr-radius-lg);
-            border: 1px solid rgba(111, 134, 216, 0.2);
+            border: 1px solid rgba(177, 67, 51, 0.16);
             box-shadow: var(--vr-shadow-soft);
         }
 
-        .contact__row {
-            margin-bottom: 1rem;
-        }
+        .contact__row { margin-bottom: 1rem; }
 
-        .contact__label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: var(--vr-muted);
-        }
+        .contact__label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--vr-muted); }
 
-        .contact__value {
-            font-weight: 600;
-            color: var(--vr-accent);
-        }
+        .contact__value { font-weight: 800; color: var(--vr-primary-dark); }
 
-        .contact__value-link {
-            color: inherit;
-            text-decoration: none;
-        }
+        .contact__value-link { color: inherit; text-decoration: none; }
 
         .contact__value-link:hover,
-        .contact__value-link:focus-visible {
-            text-decoration: underline;
-        }
+        .contact__value-link:focus-visible { text-decoration: underline; }
 
-        .contact__note {
-            font-size: 0.88rem;
-            color: var(--vr-muted);
-        }
+        .contact__note { font-size: 0.88rem; color: var(--vr-muted); }
 
         .contact__fb-card {
             padding: 1.3rem 1.2rem;
             border-radius: var(--vr-radius-md);
-            background: radial-gradient(circle at top left, rgba(111, 134, 216, 0.3), rgba(35, 64, 143, 0.95));
+            background: radial-gradient(circle at top left, rgba(177, 67, 51, 0.35), rgba(35, 64, 143, 0.95));
             color: var(--vr-white);
         }
 
-        .contact__fb-title {
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-        }
+        .contact__fb-title { font-weight: 900; margin-bottom: 0.4rem; }
 
-        .contact__fb-link {
-            color: var(--vr-white);
-            font-weight: 600;
-            text-decoration: none;
-        }
+        .contact__fb-link { color: var(--vr-white); font-weight: 800; text-decoration: none; }
 
         .contact__fb-link:hover,
-        .contact__fb-link:focus-visible {
-            text-decoration: underline;
-        }
+        .contact__fb-link:focus-visible { text-decoration: underline; }
 
         /* FOOTER */
-
         .site-footer {
             padding: 1.5rem 1.25rem 0.5rem;
-            border-top: 1px solid rgba(111, 134, 216, 0.25);
+            border-top: 1px solid rgba(177, 67, 51, 0.18);
             font-size: 0.8rem;
             color: var(--vr-muted);
             text-align: center;
             margin-top: auto;
         }
 
-        .site-footer__line {
-            margin-bottom: 0.3rem;
-        }
+        .site-footer__line { margin-bottom: 0.3rem; }
+        .site-footer__strong { font-weight: 900; color: var(--vr-primary-dark); }
 
-        .site-footer__strong {
-            font-weight: 600;
-            color: var(--vr-primary-dark);
-        }
+        html { scroll-behavior: smooth; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* --------- RESPONSIVE --------- */
-
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-            .page__wrapper {
-                padding-inline: 1rem;
-            }
+            .page__wrapper { padding-inline: 1rem; }
 
             .site-header {
                 padding-inline: 1rem;
@@ -533,9 +475,7 @@
                 margin-bottom: 1.5rem;
             }
 
-            .site-header__nav {
-                display: none;
-            }
+            .site-header__nav { display: none; }
 
             .site-header__phone {
                 display: flex;
@@ -544,15 +484,10 @@
                 font-size: 0.78rem;
             }
 
-            .site-header__phone-number {
-                font-size: 0.92rem;
-            }
+            .site-header__phone-number { font-size: 0.92rem; }
 
-            .site-header__burger {
-                display: inline-flex;
-            }
+            .site-header__burger { display: inline-flex; }
 
-            /* nav mobile fermé par défaut */
             .site-header__nav--mobile {
                 display: flex;
                 flex-direction: column;
@@ -561,7 +496,7 @@
                 padding: 0.85rem 1rem;
                 border-radius: 1rem;
                 background: rgba(255, 255, 255, 0.96);
-                border: 1px solid rgba(111, 134, 216, 0.25);
+                border: 1px solid rgba(177, 67, 51, 0.18);
                 box-shadow: 0 12px 20px rgba(0, 0, 0, 0.05);
                 max-height: 0;
                 opacity: 0;
@@ -570,131 +505,61 @@
                 transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
             }
 
-            /* nav mobile ouvert */
-            .site-header__nav--mobile--open {
-                max-height: 280px;
+            .site-header__nav--mobile.site-header__nav--open {
+                max-height: 340px;
                 opacity: 1;
                 pointer-events: auto;
             }
 
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 1.75rem;
-            }
-
-            .hero__content {
-                order: 2;
-                padding: 1.7rem 1.35rem;
-            }
-
-            .hero__visual {
-                order: 1;
-            }
-
-            .hero__title {
-                font-size: 1.9rem;
-            }
-
-            .hero__actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .hero__btn {
-                width: 100%;
-            }
-
-            .services__grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .about,
-            .contact {
-                grid-template-columns: 1fr;
-            }
-
-            .contact__fb-card {
-                order: -1;
-            }
-
-            /* Liens du menu mobile : plein écran + gros et faciles à cliquer, texte centré */
             .site-header__nav--mobile .site-header__nav-link {
                 display: block;
                 width: 100%;
                 padding: 0.75rem 0.4rem;
                 font-size: 1rem;
-                text-align: center;        /* ⬅️ centré au lieu de left */
+                text-align: center;
                 border-radius: 0.6rem;
                 background: transparent;
             }
 
-            .site-header__nav--mobile .site-header__nav-link + .site-header__nav-link {
-                margin-top: 0.25rem;
-            }
-
-            .site-header__nav--mobile .site-header__nav-link::after {
-                display: none; /* on enlève le petit trait animé sous le texte */
-            }
+            .site-header__nav--mobile .site-header__nav-link + .site-header__nav-link { margin-top: 0.25rem; }
+            .site-header__nav--mobile .site-header__nav-link::after { display: none; }
 
             .site-header__nav--mobile .site-header__nav-link:hover,
             .site-header__nav--mobile .site-header__nav-link:focus-visible {
-                background: rgba(111, 134, 216, 0.12);
+                background: rgba(167, 222, 155, 0.22);
                 color: var(--vr-primary-dark);
             }
 
+            .hero { grid-template-columns: 1fr; gap: 1.75rem; }
+            .hero__content { order: 2; padding: 1.7rem 1.35rem; }
+            .hero__visual { order: 1; }
+            .hero__title { font-size: 1.9rem; }
+
+            .hero__actions { flex-direction: column; align-items: stretch; }
+            .hero__btn { width: 100%; }
+
+            .services__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+            .about, .contact { grid-template-columns: 1fr; }
+            .contact__fb-card { order: -1; }
         }
 
         @media (max-width: 600px) {
-            .page__wrapper {
-                padding-inline: 0.8rem;
-            }
+            .page__wrapper { padding-inline: 0.8rem; }
 
-            .site-header {
-                padding: 0.5rem 0.85rem;
-                gap: 0.6rem;
-            }
+            .site-header { padding: 0.5rem 0.85rem; gap: 0.6rem; }
+            .site-header__logo-img { width: 40px; height: 40px; }
+            .site-header__title { font-size: 0.8rem; white-space: normal; max-width: 130px; }
+            .site-header__subtitle { display: none; }
+            .site-header__phone { display: none; }
 
-            .site-header__logo-img {
-                width: 40px;
-                height: 40px;
-            }
-
-            .site-header__title {
-                font-size: 0.8rem;
-                white-space: normal;
-                max-width: 130px;
-            }
-
-            .site-header__subtitle {
-                display: none;
-            }
-
-            .site-header__phone {
-                display: none;
-            }
-
-            .hero__content {
-                padding: 1.5rem 1.2rem;
-            }
-
-            .hero__logo-card {
-                padding-inline: 1.1rem;
-            }
-
-            .services__grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section__title {
-                font-size: 1.4rem;
-            }
-
-            .section__subtitle {
-                font-size: 0.92rem;
-            }
+            .services__grid { grid-template-columns: 1fr; }
+            .section__title { font-size: 1.4rem; }
+            .section__subtitle { font-size: 0.92rem; }
         }
     </style>
 </head>
+
 <body class="page__body">
 <div class="page__wrapper">
 
@@ -710,6 +575,7 @@
 
         <nav class="site-header__nav" aria-label="Navigation principale">
             <a class="site-header__nav-link" href="#services">Services</a>
+            <a class="site-header__nav-link" href="#feed">Facebook</a>
             <a class="site-header__nav-link" href="#about">À propos</a>
             <a class="site-header__nav-link" href="#contact">Contact</a>
         </nav>
@@ -719,7 +585,7 @@
             <a class="hero__phone-number" href="tel:+33611199185">06&nbsp;11&nbsp;19&nbsp;91&nbsp;85</a>
         </div>
 
-        <button class="site-header__burger" type="button" aria-label="Ouvrir le menu" id="burger-btn">
+        <button class="site-header__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-nav" id="burger-btn">
             <span class="site-header__burger-line"></span>
         </button>
     </header>
@@ -727,6 +593,7 @@
     <!-- NAV MOBILE -->
     <nav class="site-header__nav site-header__nav--mobile" aria-label="Navigation principale mobile" id="mobile-nav">
         <a class="site-header__nav-link" href="#services">Services</a>
+        <a class="site-header__nav-link" href="#feed">Facebook</a>
         <a class="site-header__nav-link" href="#about">À propos</a>
         <a class="site-header__nav-link" href="#contact">Contact</a>
     </nav>
@@ -745,18 +612,15 @@
                 </h1>
                 <p class="hero__location">Basé près de Lille – interventions sur la région Lilloise et alentours.</p>
                 <p class="hero__description">
-                    Vanpeene Rénovation EURL vous accompagne pour tous vos travaux de rénovation intérieure
-                    et extérieure&nbsp;: peinture, sols, salles de bains, façades, toitures… Un seul interlocuteur,
-                    un travail soigné et des finitions propres.
+                    Vanpeene Rénovation EURL vous accompagne pour vos travaux de toiture (couvreur, zinguerie),
+                    et de rénovation intérieure / extérieure : peinture, sols, salles de bains, façades…
+                    Un seul interlocuteur, un travail soigné et des finitions propres.
                 </p>
 
                 <div class="hero__actions">
-                    <a class="hero__btn hero__btn--primary" href="#contact">
-                        Demander un devis gratuit
-                    </a>
-                    <a class="hero__btn hero__btn--ghost" href="tel:+33611199185">
-                        📞 Appeler le&nbsp;06&nbsp;11&nbsp;19&nbsp;91&nbsp;85
-                    </a>
+                    <a class="hero__btn hero__btn--primary" href="#contact">Demander un devis gratuit</a>
+                    <a class="hero__btn hero__btn--ghost" href="tel:+33611199185">📞 Appeler le&nbsp;06&nbsp;11&nbsp;19&nbsp;91&nbsp;85</a>
+                    <a class="hero__btn hero__btn--mail" href="mailto:cristophervanpeene@gmail.com">✉️ Envoyer un email</a>
                 </div>
             </div>
 
@@ -764,18 +628,9 @@
                 <div class="hero__logo-card">
                     <img src="assets/logo-vanpeene-renovation.png" alt="Vanpeene Rénovation EURL" class="hero__logo-img" />
                     <ul class="hero__list">
-                        <li class="hero__list-item">
-                            <span class="hero__list-dot"></span>
-                            <span>Conseils personnalisés pour vos projets de rénovation.</span>
-                        </li>
-                        <li class="hero__list-item">
-                            <span class="hero__list-dot"></span>
-                            <span>Travail propre, suivi sérieux et respect des délais.</span>
-                        </li>
-                        <li class="hero__list-item">
-                            <span class="hero__list-dot"></span>
-                            <span>Devis gratuit, sans engagement, sur la région Lilloise.</span>
-                        </li>
+                        <li class="hero__list-item"><span class="hero__list-dot"></span><span>Conseils personnalisés pour vos projets de rénovation.</span></li>
+                        <li class="hero__list-item"><span class="hero__list-dot"></span><span>Travail propre, suivi sérieux et respect des délais.</span></li>
+                        <li class="hero__list-item"><span class="hero__list-dot"></span><span>Devis gratuit, sans engagement, sur la région Lilloise.</span></li>
                     </ul>
                 </div>
             </div>
@@ -786,12 +641,36 @@
             <header>
                 <h2 class="section__title">Nos principaux services</h2>
                 <p class="section__subtitle">
-                    Vanpeene Rénovation EURL intervient sur une large gamme de travaux pour améliorer, moderniser
-                    ou remettre à neuf votre logement.
+                    Priorité à la toiture (couvreur, zinguerie, toitures secondaires), et une large gamme de travaux
+                    pour améliorer, moderniser ou remettre à neuf votre logement.
                 </p>
             </header>
 
             <div class="services__grid">
+                <article class="services__card services__card--featured">
+                    <h3 class="services__card-title">Couvreur – toiture</h3>
+                    <p class="services__card-text">
+                        Réparation et entretien, remplacement ponctuel de tuiles, traitement local, petites reprises,
+                        interventions préventives et conseils sur l’état de votre toiture.
+                    </p>
+                </article>
+
+                <article class="services__card services__card--featured">
+                    <h3 class="services__card-title">Zinguerie</h3>
+                    <p class="services__card-text">
+                        Chéneaux, gouttières, abergements, raccords et finitions zinc : des évacuations propres
+                        et une étanchéité soignée.
+                    </p>
+                </article>
+
+                <article class="services__card services__card--featured">
+                    <h3 class="services__card-title">Toitures secondaires</h3>
+                    <p class="services__card-text">
+                        Abris, garages, extensions, annexes : interventions sur toitures secondaires
+                        (réparation, amélioration, finitions).
+                    </p>
+                </article>
+
                 <article class="services__card">
                     <h3 class="services__card-title">Rénovation intérieure</h3>
                     <p class="services__card-text">
@@ -817,14 +696,6 @@
                 </article>
 
                 <article class="services__card">
-                    <h3 class="services__card-title">Toiture & petites réparations</h3>
-                    <p class="services__card-text">
-                        Petites réparations de toiture, traitement local, remplacement ponctuel de tuiles
-                        et interventions préventives.
-                    </p>
-                </article>
-
-                <article class="services__card">
                     <h3 class="services__card-title">Réaménagement & finitions</h3>
                     <p class="services__card-text">
                         Création d’ambiances, finitions soignées, ajustements après travaux,
@@ -840,6 +711,37 @@
                     </p>
                 </article>
             </div>
+        </section>
+
+        <!-- FACEBOOK FEED -->
+        <section class="section feed" id="feed">
+            <header>
+                <h2 class="section__title">Derniers messages sur Facebook</h2>
+                <p class="section__subtitle">Actus, photos de chantiers, avant/après…</p>
+            </header>
+
+            <div class="feed__wrap feed__wrap--featured">
+
+                <div class="feed__embed">
+                    <iframe
+                            class="feed__frame"
+                            title="Facebook - Vanpeene Rénovation"
+                            loading="lazy"
+                            allow="encrypted-media; picture-in-picture; clipboard-write"
+                            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fchristopher.vanpeene.9%2F&tabs=timeline&width=520&height=820&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false">
+                    </iframe>
+                </div>
+
+                <div class="feed__actions">
+                    <a class="feed__btn" href="https://www.facebook.com/christopher.vanpeene.9/" target="_blank" rel="noopener">
+                        Voir sur Facebook →
+                    </a>
+                    <a class="feed__btn" href="mailto:cristophervanpeene@gmail.com">
+                        Demander un devis par email →
+                    </a>
+                </div>
+            </div>
+
         </section>
 
         <!-- À PROPOS / ZONE -->
@@ -869,7 +771,8 @@
                     <div class="about__zone-title">Zone d’intervention</div>
                     <p>
                         Interventions principalement sur la région Lilloise et la métropole :
-                        Lille, Lambersart, Lomme, Wambrechies, Marcq-en-Barœul, et communes voisines.
+                        Lille, Lambersart, Lomme, Wambrechies, Marcq-en-Barœul, Haubourdin, Hallennes-lez-Haubourdin
+                        et communes voisines.
                     </p>
                     <p style="margin-top:0.6rem;">
                         Vous avez un projet de rénovation dans ce secteur&nbsp;?
@@ -894,18 +797,21 @@
                     <div class="contact__row">
                         <div class="contact__label">Téléphone</div>
                         <div class="contact__value">
-                            <a class="contact__value-link" href="tel:+33611199185">
-                                06&nbsp;11&nbsp;19&nbsp;91&nbsp;85
-                            </a>
+                            <a class="contact__value-link" href="tel:+33611199185">06&nbsp;11&nbsp;19&nbsp;91&nbsp;85</a>
+                        </div>
+                    </div>
+
+                    <div class="contact__row">
+                        <div class="contact__label">Email</div>
+                        <div class="contact__value">
+                            <a class="contact__value-link" href="mailto:cristophervanpeene@gmail.com">cristophervanpeene@gmail.com</a>
                         </div>
                     </div>
 
                     <div class="contact__row">
                         <div class="contact__label">Facebook</div>
                         <div class="contact__value">
-                            <a class="contact__value-link"
-                               href="https://www.facebook.com/christopher.vanpeene.9"
-                               target="_blank" rel="noopener">
+                            <a class="contact__value-link" href="https://www.facebook.com/christopher.vanpeene.9/" target="_blank" rel="noopener">
                                 christopher.vanpeene.9
                             </a>
                         </div>
@@ -913,9 +819,7 @@
 
                     <div class="contact__row">
                         <div class="contact__label">Horaires indicatifs</div>
-                        <div class="contact__value">
-                            Du lundi au vendredi – sur rendez-vous.
-                        </div>
+                        <div class="contact__value">Du lundi au vendredi – sur rendez-vous.</div>
                     </div>
 
                     <p class="contact__note">
@@ -930,10 +834,8 @@
                         Photos avant / après, idées de rénovation et exemples de chantiers
                         sur la région Lilloise.
                     </p>
-                    <a class="contact__fb-link"
-                       href="https://www.facebook.com/vanpeene.renovation/"
-                       target="_blank" rel="noopener">
-                        Voir la page Facebook Vanpeene Rénovation →
+                    <a class="contact__fb-link" href="https://www.facebook.com/christopher.vanpeene.9/" target="_blank" rel="noopener">
+                        Voir la page Facebook →
                     </a>
                 </aside>
             </div>
@@ -958,20 +860,36 @@
 
         if (!burger || !header || !mobileNav) return;
 
-        burger.addEventListener("click", function () {
+        const mqMobile = window.matchMedia("(max-width: 900px)");
+
+        function closeMobileMenu() {
+            header.classList.remove("site-header--open");
+            burger.setAttribute("aria-expanded", "false");
+            mobileNav.classList.remove("site-header__nav--open");
+        }
+
+        function toggleMobileMenu() {
             const isOpen = header.classList.toggle("site-header--open");
             burger.setAttribute("aria-expanded", isOpen ? "true" : "false");
-            mobileNav.classList.toggle("site-header__nav--mobile--open", isOpen);
-        });
+            mobileNav.classList.toggle("site-header__nav--open", isOpen);
+        }
+
+        burger.addEventListener("click", toggleMobileMenu);
 
         mobileNav.addEventListener("click", function (event) {
-            if (event.target.matches("a")) {
-                header.classList.remove("site-header--open");
-                burger.setAttribute("aria-expanded", "false");
-                mobileNav.classList.remove("site-header__nav--mobile--open");
-            }
+            if (event.target && event.target.matches("a")) closeMobileMenu();
         });
+
+        function handleViewportChange() {
+            closeMobileMenu(); // FIX “2 menus” / états incohérents après resize
+        }
+
+        if (mqMobile.addEventListener) mqMobile.addEventListener("change", handleViewportChange);
+        else mqMobile.addListener(handleViewportChange);
+
+        window.addEventListener("resize", handleViewportChange);
     })();
 </script>
 </body>
 </html>
+
