@@ -450,6 +450,93 @@
 
         html { scroll-behavior: smooth; }
 
+        /* =========================
+   FULL BLEED (break out of wrapper)
+   ========================= */
+        .section--bleed {
+            position: relative;
+            left: 50%;
+            right: 50%;
+            width: 100vw;
+            margin-left: -50vw;
+            margin-right: -50vw;
+        }
+
+        .section--bleed .section__inner {
+            max-width: var(--vr-max-width);
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        .portfolio__rail{
+            /*border-radius: var(--vr-radius-lg);
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(177, 67, 51, 0.14);
+            box-shadow: var(--vr-shadow-soft);*/
+        }
+
+        .portfolio__item{
+            border-radius: var(--vr-radius-lg);
+            overflow: hidden;
+        }
+
+        .portfolio__img{
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: var(--pos, 50% 50%);
+        }
+
+
+        /* =========================
+   PORTFOLIO AUTO (no scroll, slideshow)
+   ========================= */
+        .portfolio--auto .portfolio__rail {
+            position: relative;
+            overflow: hidden;          /* ✅ pas de scroll */
+            padding: 0.25rem 1.25rem 1.25rem;
+            height: clamp(260px, 58vh, 560px);
+            touch-action: pan-y;       /* ✅ on garde le scroll vertical de la page */
+        }
+
+        /* on empile toutes les images, 1 seule visible */
+        .portfolio--auto .portfolio__item {
+            position: absolute;
+            inset: 0 1.25rem 1.25rem;  /* respecte le padding */
+            width: auto;
+            height: auto;
+            margin: 0;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.02);
+            transition: opacity 650ms ease, transform 1400ms ease;
+        }
+
+        .portfolio--auto .portfolio__item.is-active {
+            opacity: 1;
+            pointer-events: auto; /* clic possible (lightbox) */
+            transform: scale(1.06);
+        }
+
+        /* optionnel: petite étiquette plus lisible */
+        .portfolio--auto .portfolio__caption {
+            left: 2.25rem;
+            bottom: 2.1rem;
+        }
+
+        /* Respecte les préférences utilisateur */
+        @media (prefers-reduced-motion: reduce) {
+            .portfolio--auto .portfolio__item {
+                transition: none;
+                transform: none;
+            }
+            .portfolio--auto .portfolio__item.is-active {
+                transform: none;
+            }
+        }
+
+
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .page__wrapper { padding-inline: 1rem; }
@@ -543,10 +630,83 @@
             .section__title { font-size: 1.4rem; }
             .section__subtitle { font-size: 0.92rem; }
         }
+
+        html, body { overflow-x: clip; }
+        @supports not (overflow-x: clip) {
+            html, body { overflow-x: hidden; }
+        }
+
+        /* =========================
+   BACKGROUND ROTATOR (photos behind)
+   ========================= */
+        .page__body { position: relative; }
+
+        /* tout le contenu au-dessus du fond */
+        .page__wrapper { position: relative; z-index: 2; }
+
+        /* fond fixe plein écran */
+        .bg-rotator{
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* 2 couches pour faire un vrai fondu (background-image ne "transition" pas bien tout seul) */
+        .bg-rotator__layer{
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: 50% 50%;
+            filter: saturate(1.05) contrast(1.02);
+            transform: scale(1.06);
+            opacity: 0;
+            transition: opacity 900ms ease;
+        }
+
+        .bg-rotator__layer.is-visible{
+            opacity: 1;
+        }
+
+        /* voile de lisibilité + ton style (dégradés) par-dessus la photo */
+        .bg-rotator::after{
+            content:"";
+            position:absolute;
+            inset:0;
+            background:
+                    radial-gradient(circle at top, rgba(255,255,255,0.78) 0, rgba(251,250,247,0.70) 55%, rgba(177,67,51,0.10) 100%),
+                    radial-gradient(circle at 20% 30%, rgba(167,222,155,0.18) 0, transparent 55%),
+                    linear-gradient(0deg, rgba(251,250,247,0.55), rgba(251,250,247,0.55));
+        }
+
+        /* effet "glass" léger pour laisser voir le fond derrière */
+        .hero__content,
+        .hero__logo-card,
+        .services__card,
+        .feed__wrap,
+        .about__highlight,
+        .about__zone,
+        .contact__card{
+            background: rgba(255,255,255,0.86);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* accessibilité: si reduce motion => pas d'animation visuelle agressive */
+        @media (prefers-reduced-motion: reduce) {
+            .bg-rotator__layer { transition: none; }
+        }
+
     </style>
 </head>
 
 <body class="page__body">
+
+<div class="bg-rotator" aria-hidden="true">
+    <div class="bg-rotator__layer is-visible" id="bg-a"></div>
+    <div class="bg-rotator__layer" id="bg-b"></div>
+</div>
 <div class="page__wrapper">
 
     <!-- HEADER -->
@@ -696,6 +856,87 @@
                         planification des travaux en fonction de votre budget.
                     </p>
                 </article>
+            </div>
+        </section>
+
+        <section class="section section--bleed portfolio portfolio--auto" id="portfolio">
+            <div class="section__inner">
+                <header>
+                    <h2 class="section__title">Réalisations</h2>
+                    <p class="section__subtitle">Toiture, zinguerie, façades, intérieur, salles de bains, terrasses…</p>
+                </header>
+            </div>
+
+            <div class="portfolio__rail" aria-label="Galerie de réalisations">
+                <!-- TOITURE -->
+                <figure class="portfolio__item" style="--pos: 50% 45%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-00.jpg" alt="Travaux de toiture - réalisation 1" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 45%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-01.jpg" alt="Travaux de toiture - réalisation 2" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 50%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-02.jpg" alt="Travaux de toiture - réalisation 3" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 50%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-03.jpg" alt="Travaux de toiture - réalisation 4" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 55%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-04.jpg" alt="Travaux de toiture - réalisation 5" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 55%;">
+                    <img class="portfolio__img" src="assets/realisations/toiture-05.jpg" alt="Travaux de toiture - réalisation 6" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Toiture</figcaption>
+                </figure>
+
+                <!-- FAÇADE -->
+                <figure class="portfolio__item" style="--pos: 50% 50%;">
+                    <img class="portfolio__img" src="assets/realisations/facade-01.jpg" alt="Travaux de façade - réalisation 1" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Façade</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 50%;">
+                    <img class="portfolio__img" src="assets/realisations/facade-02.jpg" alt="Travaux de façade - réalisation 2" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Façade</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 50%;">
+                    <img class="portfolio__img" src="assets/realisations/facade-03.jpg" alt="Travaux de façade - réalisation 3" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Façade</figcaption>
+                </figure>
+
+                <!-- TERRASSE -->
+                <figure class="portfolio__item" style="--pos: 50% 60%;">
+                    <img class="portfolio__img" src="assets/realisations/terrasse-01.jpg" alt="Terrasse - réalisation 1" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Terrasse</figcaption>
+                </figure>
+
+                <!-- INTÉRIEUR -->
+                <figure class="portfolio__item" style="--pos: 50% 55%;">
+                    <img class="portfolio__img" src="assets/realisations/interieur-01.jpg" alt="Rénovation intérieure - réalisation 1" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Intérieur</figcaption>
+                </figure>
+
+                <!-- SALLE DE BAIN -->
+                <figure class="portfolio__item" style="--pos: 50% 55%;">
+                    <img class="portfolio__img" src="assets/realisations/salle-de-bain-01.jpg" alt="Salle de bains - réalisation 1" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Salle de bains</figcaption>
+                </figure>
+
+                <figure class="portfolio__item" style="--pos: 50% 55%;">
+                    <img class="portfolio__img" src="assets/realisations/salle-de-bain-02.jpg" alt="Salle de bains - réalisation 2" loading="lazy" decoding="async">
+                    <figcaption class="portfolio__caption">Salle de bains</figcaption>
+                </figure>
             </div>
         </section>
 
@@ -938,6 +1179,180 @@
 
     })();
 </script>
+
+<script>
+    (function () {
+        const section = document.querySelector(".portfolio--auto");
+        if (!section) return;
+
+        const items = Array.from(section.querySelectorAll(".portfolio__item"));
+        if (items.length === 0) return;
+
+        const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const delayMs = 4500; // vitesse de défilement (4.5s). Ajuste si tu veux.
+
+        let order = [];
+        let pos = 0;
+        let timer = null;
+        let lastIndex = -1;
+
+        function shuffle(arr) {
+            // Fisher–Yates
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function buildOrder() {
+            order = shuffle(items.map((_, i) => i));
+            // évite que la 1ère après reshuffle == dernière affichée
+            if (order.length > 1 && order[0] === lastIndex) {
+                [order[0], order[1]] = [order[1], order[0]];
+            }
+            pos = 0;
+        }
+
+        function show(index) {
+            items.forEach((el, i) => el.classList.toggle("is-active", i === index));
+            lastIndex = index;
+        }
+
+        function next() {
+            if (order.length === 0 || pos >= order.length) buildOrder();
+            const idx = order[pos++];
+            show(idx);
+        }
+
+        function start() {
+            if (prefersReduce) return; // pas d’autoplay si reduce motion
+            if (timer) return;
+            timer = setInterval(next, delayMs);
+        }
+
+        function stop() {
+            if (!timer) return;
+            clearInterval(timer);
+            timer = null;
+        }
+
+        // init
+        buildOrder();
+        next();
+
+       start();
+
+    })();
+</script>
+
+<script>
+    (function () {
+        const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (prefersReduce) return;
+
+        const layerA = document.getElementById("bg-a");
+        const layerB = document.getElementById("bg-b");
+        if (!layerA || !layerB) return;
+
+        const images = [
+            "assets/realisations/facade-01.jpg",
+            "assets/realisations/facade-02.jpg",
+            "assets/realisations/facade-03.jpg",
+            "assets/realisations/interieur-01.jpg",
+            "assets/realisations/salle-de-bain-01.jpg",
+            "assets/realisations/salle-de-bain-02.jpg",
+            "assets/realisations/terrasse-01.jpg",
+            "assets/realisations/toiture-00.jpg",
+            "assets/realisations/toiture-01.jpg",
+            "assets/realisations/toiture-02.jpg",
+            "assets/realisations/toiture-03.jpg",
+            "assets/realisations/toiture-04.jpg",
+            "assets/realisations/toiture-05.jpg",
+        ];
+
+        const delayMs = 6000; // vitesse de défilement (6s)
+
+        let order = [];
+        let pos = 0;
+        let last = -1;
+        let timer = null;
+        let showingA = true;
+
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function buildOrder() {
+            order = shuffle(images.map((_, i) => i));
+            if (order.length > 1 && order[0] === last) [order[0], order[1]] = [order[1], order[0]];
+            pos = 0;
+        }
+
+        function preload(src) {
+            const img = new Image();
+            img.src = src;
+        }
+
+        function nextSrc() {
+            if (order.length === 0 || pos >= order.length) buildOrder();
+            const idx = order[pos++];
+            last = idx;
+            return images[idx];
+        }
+
+        function setBg(layer, src) {
+            layer.style.backgroundImage = `url("${src}")`;
+        }
+
+        function tick() {
+            const src = nextSrc();
+
+            // précharge la suivante (meilleur rendu)
+            const peek = (pos < order.length) ? images[order[pos]] : images[order[0]];
+            preload(peek);
+
+            const incoming = showingA ? layerB : layerA;
+            const outgoing = showingA ? layerA : layerB;
+
+            setBg(incoming, src);
+            incoming.classList.add("is-visible");
+            outgoing.classList.remove("is-visible");
+
+            showingA = !showingA;
+        }
+
+        function start() {
+            if (timer) return;
+            timer = setInterval(tick, delayMs);
+        }
+
+        function stop() {
+            if (!timer) return;
+            clearInterval(timer);
+            timer = null;
+        }
+
+        // init: première image immédiate
+        buildOrder();
+        const first = nextSrc();
+        setBg(layerA, first);
+        layerA.classList.add("is-visible");
+        preload(images[order[pos]] || images[0]);
+        start();
+
+        // pause si onglet inactif
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) stop();
+            else start();
+        });
+    })();
+</script>
+
 
 </body>
 </html>
